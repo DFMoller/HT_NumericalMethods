@@ -28,7 +28,7 @@ new_temps = temps
 distribution_chart = pygal.XY(stroke=True, show_dots=True)
 distribution_chart.title = 'Temperature Distribution across the Steak every minute'
 
-mid_temp_line = [(0, temps[25])]
+mid_temp_line = [(0, temps[25] - 273.15)]
 for i in range(cooking_seconds):
     line = []
     new_temps[0] = 2*dt*h*(T_inf - temps[0])/(density*dx*cp) + 2*dt*k*(temps[1] - temps[0])/(density*pow(dx,2)*cp) + temps[0]
@@ -44,7 +44,7 @@ for i in range(cooking_seconds):
     if (i+1) % 60 == 0:
         distribution_chart.add(f'{(i+1)/60} min', line)
 
-    mid_temp_line.append(((i+1)*dt, temps[25]))
+    mid_temp_line.append(((i+1)*dt, temps[25] - 273.15))
 
 mid_temp_chart = pygal.XY(stroke=True, show_dots=False)
 mid_temp_chart.title = 'Temperature change at the midpoint of the Steak'
